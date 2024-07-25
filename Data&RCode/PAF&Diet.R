@@ -1,11 +1,12 @@
 ################################################################################
 # DATA OF EACH PAIR OF DIETARY FACTOR AND CANCER SITE TO COMPUTE AF
 ################################################################################
-DIET<-read.table("...[Your_Path]\\AfData.csv",
+DIET<-read.table("C:\\Users\\matte\\OneDrive - Università degli Studi di Milano\\Documenti\\Work\\PAF\\Italy\\Diet\\Data\\AfData.csv",
                  header=T,
                  dec=".",
                  sep=";"
                 )
+
 # Log RR for an increase of 1 g/day of dietary factor
 DIET$logRR.1g[
               DIET$DF=="Dai"|
@@ -154,7 +155,7 @@ colnames(PREV.DF)<-c(
                      "rme.col.w","mp.rme.col.w","p.rme.col.w","d.rme.col.w",
                      "rme.col.m","mp.rme.col.m","p.rme.col.m","d.rme.col.m",
                      "dai.col.w","mp.dai.col.w","p.dai.col.w","d.dai.col.w",
-                     "dai.col.m","mp.dai.col.m","p.dai.col.m","d.dai.col.m", #24
+                     "dai.col.m","mp.dai.col.m","p.dai.col.m","d.dai.col.m",
                      "nsv.ora.w","mp.nsv.ora.w","p.nsv.ora.w","d.nsv.ora.w",
                      "nsv.ora.m","mp.nsv.ora.m","p.nsv.ora.m","d.nsv.ora.m",
                      "nsv.nas.w","mp.nsv.nas.w","p.nsv.nas.w","d.nsv.nas.w",
@@ -166,13 +167,13 @@ colnames(PREV.DF)<-c(
                      "nsv.col.w","mp.nsv.col.w","p.nsv.col.w","d.nsv.col.w",
                      "nsv.col.m","mp.nsv.col.m","p.nsv.col.m","d.nsv.col.m",
                      "nsv.lun.w","mp.nsv.lun.w","p.nsv.lun.w","d.nsv.lun.w",
-                     "nsv.lun.m","mp.nsv.lun.m","p.nsv.lun.m","d.nsv.lun.m", #72
+                     "nsv.lun.m","mp.nsv.lun.m","p.nsv.lun.m","d.nsv.lun.m",
                      "fru.ses.w","mp.fru.ses.w","p.fru.ses.w","d.fru.ses.w",
                      "fru.ses.m","mp.fru.ses.m","p.fru.ses.m","d.fru.ses.m",
                      "fru.sto.w","mp.fru.sto.w","p.fru.sto.w","d.fru.sto.w",
                      "fru.sto.m","mp.fru.sto.m","p.fru.sto.m","d.fru.sto.m",
                      "fru.lun.w","mp.fru.lun.w","p.fru.lun.w","d.fru.lun.w",
-                     "fru.lun.m","mp.fru.lun.m","p.fru.lun.m","d.fru.lun.m", #96
+                     "fru.lun.m","mp.fru.lun.m","p.fru.lun.m","d.fru.lun.m",
                      "fib.col.w","mp.fib.col.w","p.fib.col.w","d.fib.col.w", 
                      "fib.col.m","mp.fib.col.m","p.fib.col.m","d.fib.col.m"
                     )
@@ -187,7 +188,7 @@ PREV.DF[,"pme.col.w"]<-c(
                                ),
                          DIET$high.DF.w[DIET$DF=="Pme"&DIET$Cancer=="Col"]
                         )
-# Mid-points for adiacent values of quantiles
+# Mid-points for adjacent values of quantiles
 for(i in 1:nrow(PREV.DF)-1)
 {
  PREV.DF[i+1,"mp.pme.col.w"]<-mean(c(PREV.DF[i,"pme.col.w"],PREV.DF[i+1,"pme.col.w"]))
@@ -211,15 +212,15 @@ PREV.DF[,"pme.col.m"]<-c(
                                ),
                          DIET$high.DF.m[DIET$DF=="Pme"&DIET$Cancer=="Col"]
                         )
-# Mid-points for adiacent values of quantiles
+# Mid-points for adjacent values of quantiles
 for(i in 1:nrow(PREV.DF)-1)
 {
  PREV.DF[i+1,"mp.pme.col.m"]<-mean(c(PREV.DF[i,"pme.col.m"],PREV.DF[i+1,"pme.col.m"]))
 }
 # Prevalence
 PREV.DF[,"p.pme.col.m"]<-c(
-                           DIET$pro.ncon.w[DIET$DF=="Pme"&DIET$Cancer=="Col"],
-                           rep(DIET$pro.con.w[DIET$DF=="Pme"&DIET$Cancer=="Col"]/(nrow(PREV.DF)-1),(nrow(PREV.DF)-1))
+                           DIET$pro.ncon.m[DIET$DF=="Pme"&DIET$Cancer=="Col"],
+                           rep(DIET$pro.con.m[DIET$DF=="Pme"&DIET$Cancer=="Col"]/(nrow(PREV.DF)-1),(nrow(PREV.DF)-1))
                           )
 # Deviation (excess or deficit) in consumption from the recommendation (counterfactual distribution)
 PREV.DF[which(PREV.DF[,"mp.pme.col.m"]==counter.pme),"d.pme.col.m"]<-0
@@ -235,7 +236,7 @@ PREV.DF[,"rme.col.w"]<-c(
                                ),
                          DIET$high.DF.w[DIET$DF=="Rme"&DIET$Cancer=="Col"]
                         )
-# Mid-points for adiacent values of quantiles
+# Mid-points for adjacent values of quantiles
 for(i in 1:nrow(PREV.DF)-1)
 {
  PREV.DF[i+1,"mp.rme.col.w"]<-mean(c(PREV.DF[i,"rme.col.w"],PREV.DF[i+1,"rme.col.w"]))
@@ -259,15 +260,15 @@ PREV.DF[,"rme.col.m"]<-c(
                                ),
                          DIET$high.DF.m[DIET$DF=="Rme"&DIET$Cancer=="Col"]
                         )
-# Mid-points for adiacent values of quantiles
+# Mid-points for adjacent values of quantiles
 for(i in 1:nrow(PREV.DF)-1)
 {
  PREV.DF[i+1,"mp.rme.col.m"]<-mean(c(PREV.DF[i,"rme.col.m"],PREV.DF[i+1,"rme.col.m"]))
 }
 # Prevalence
 PREV.DF[,"p.rme.col.m"]<-c(
-                           DIET$pro.ncon.w[DIET$DF=="Rme"&DIET$Cancer=="Col"],
-                           rep(DIET$pro.con.w[DIET$DF=="Rme"&DIET$Cancer=="Col"]/(nrow(PREV.DF)-1),(nrow(PREV.DF)-1))
+                           DIET$pro.ncon.m[DIET$DF=="Rme"&DIET$Cancer=="Col"],
+                           rep(DIET$pro.con.m[DIET$DF=="Rme"&DIET$Cancer=="Col"]/(nrow(PREV.DF)-1),(nrow(PREV.DF)-1))
                           )
 # Deviation (excess or deficit) in consumption from the recommendation (counterfactual distribution)
 PREV.DF[which(PREV.DF[,"mp.rme.col.m"]<counter.rme),"d.rme.col.m"]<-0
@@ -283,7 +284,7 @@ PREV.DF[,"dai.col.w"]<-c(
                                ),
                          DIET$high.DF.w[DIET$DF=="Dai"&DIET$Cancer=="Col"]
                         )
-# Mid-points for adiacent values of quantiles
+# Mid-points for adjacent values of quantiles
 for(i in 1:nrow(PREV.DF)-1)
 {
  PREV.DF[i+1,"mp.dai.col.w"]<-mean(c(PREV.DF[i,"dai.col.w"],PREV.DF[i+1,"dai.col.w"]))
@@ -307,15 +308,15 @@ PREV.DF[,"dai.col.m"]<-c(
                                ),
                          DIET$high.DF.m[DIET$DF=="Dai"&DIET$Cancer=="Col"]
                         )
-# Mid-points for adiacent values of quantiles
+# Mid-points for adjacent values of quantiles
 for(i in 1:nrow(PREV.DF)-1)
 {
  PREV.DF[i+1,"mp.dai.col.m"]<-mean(c(PREV.DF[i,"dai.col.m"],PREV.DF[i+1,"dai.col.m"]))
 }
 # Prevalence
 PREV.DF[,"p.dai.col.m"]<-c(
-                           DIET$pro.ncon.w[DIET$DF=="Dai"&DIET$Cancer=="Col"],
-                           rep(DIET$pro.con.w[DIET$DF=="Dai"&DIET$Cancer=="Col"]/(nrow(PREV.DF)-1),(nrow(PREV.DF)-1))
+                           DIET$pro.ncon.m[DIET$DF=="Dai"&DIET$Cancer=="Col"],
+                           rep(DIET$pro.con.m[DIET$DF=="Dai"&DIET$Cancer=="Col"]/(nrow(PREV.DF)-1),(nrow(PREV.DF)-1))
                           )
 # Deviation (excess or deficit) in consumption from the recommendation (counterfactual distribution)
 PREV.DF[which(PREV.DF[,"mp.dai.col.m"]>=counter.dai),"d.dai.col.m"]<-0
@@ -331,7 +332,7 @@ PREV.DF[,seq(25,72,8)]<-c(
                                ),
                          DIET$high.DF.w[DIET$DF=="Nsv"&DIET$Cancer=="Ora"]
                         )
-# Mid-points for adiacent values of quantiles
+# Mid-points for adjacent values of quantiles
 for(i in 1:nrow(PREV.DF)-1)
 {
  PREV.DF[i+1,seq(25,72,8)+1]<-mean(c(PREV.DF[i,"nsv.ora.w"],PREV.DF[i+1,"nsv.ora.w"]))
@@ -355,15 +356,15 @@ PREV.DF[,seq(29,72,8)]<-c(
                                ),
                          DIET$high.DF.m[DIET$DF=="Nsv"&DIET$Cancer=="Ora"]
                         )
-# Mid-points for adiacent values of quantiles
+# Mid-points for adjacent values of quantiles
 for(i in 1:nrow(PREV.DF)-1)
 {
  PREV.DF[i+1,seq(29,72,8)+1]<-mean(c(PREV.DF[i,"nsv.ora.m"],PREV.DF[i+1,"nsv.ora.m"]))
 }
 # Prevalence
 PREV.DF[,seq(29,72,8)+2]<-c(
-                           DIET$pro.ncon.w[DIET$DF=="Nsv"&DIET$Cancer=="Ora"],
-                           rep(DIET$pro.con.w[DIET$DF=="Nsv"&DIET$Cancer=="Ora"]/(nrow(PREV.DF)-1),(nrow(PREV.DF)-1))
+                           DIET$pro.ncon.m[DIET$DF=="Nsv"&DIET$Cancer=="Ora"],
+                           rep(DIET$pro.con.m[DIET$DF=="Nsv"&DIET$Cancer=="Ora"]/(nrow(PREV.DF)-1),(nrow(PREV.DF)-1))
                           )
 # Deviation (excess or deficit) in consumption from the recommendation (counterfactual ditribution)
 PREV.DF[which(PREV.DF[,"mp.nsv.ora.m"]<counter.nsv),seq(29,72,8)+3]<-counter.nsv-PREV.DF[which(PREV.DF[,"mp.nsv.ora.m"]<counter.nsv),"mp.nsv.ora.m"]
@@ -379,7 +380,7 @@ PREV.DF[,seq(73,96,8)]<-c(
                                 ),
                           DIET$high.DF.w[DIET$DF=="Fru"&DIET$Cancer=="Ses"]
                          )
-# Mid-points for adiacent values of quantiles
+# Mid-points for adjacent values of quantiles
 for(i in 1:nrow(PREV.DF)-1)
 {
  PREV.DF[i+1,seq(73,96,8)+1]<-mean(c(PREV.DF[i,"fru.ses.w"],PREV.DF[i+1,"fru.ses.w"]))
@@ -403,15 +404,15 @@ PREV.DF[,seq(77,96,8)]<-c(
                                 ),
                           DIET$high.DF.m[DIET$DF=="Fru"&DIET$Cancer=="Ses"]
                          )
-# Mid-points for adiacent values of quantiles
+# Mid-points for adjacent values of quantiles
 for(i in 1:nrow(PREV.DF)-1)
 {
  PREV.DF[i+1,seq(77,96,8)+1]<-mean(c(PREV.DF[i,"fru.ses.m"],PREV.DF[i+1,"fru.ses.m"]))
 }
 # Prevalence
 PREV.DF[,seq(77,96,8)+2]<-c(
-                            DIET$pro.ncon.w[DIET$DF=="Fru"&DIET$Cancer=="Ses"],
-                            rep(DIET$pro.con.w[DIET$DF=="Fru"&DIET$Cancer=="Ses"]/(nrow(PREV.DF)-1),(nrow(PREV.DF)-1))
+                            DIET$pro.ncon.m[DIET$DF=="Fru"&DIET$Cancer=="Ses"],
+                            rep(DIET$pro.con.m[DIET$DF=="Fru"&DIET$Cancer=="Ses"]/(nrow(PREV.DF)-1),(nrow(PREV.DF)-1))
                            )
 # Deviation (excess or deficit) in consumption from the recommendation (counterfactual distribution)
 PREV.DF[which(PREV.DF[,"mp.fru.ses.m"]<counter.fru),seq(77,96,8)+3]<-counter.fru-PREV.DF[which(PREV.DF[,"mp.fru.ses.m"]<counter.fru),"mp.fru.ses.m"]
@@ -427,7 +428,7 @@ PREV.DF[,"fib.col.w"]<-c(
                                ),
                          DIET$high.DF.w[DIET$DF=="Fib"&DIET$Cancer=="Col"]
                         )
-# Mid-points for adiacent values of quantiles
+# Mid-points for adjacent values of quantiles
 for(i in 1:nrow(PREV.DF)-1)
 {
  PREV.DF[i+1,"mp.fib.col.w"]<-mean(c(PREV.DF[i,"fib.col.w"],PREV.DF[i+1,"fib.col.w"]))
@@ -451,15 +452,15 @@ PREV.DF[,"fib.col.m"]<-c(
                                ),
                          DIET$high.DF.m[DIET$DF=="Fib"&DIET$Cancer=="Col"]
                         )
-# Mid-points for adiacent values of quantiles
+# Mid-points for adjacent values of quantiles
 for(i in 1:nrow(PREV.DF)-1)
 {
  PREV.DF[i+1,"mp.fib.col.m"]<-mean(c(PREV.DF[i,"fib.col.m"],PREV.DF[i+1,"fib.col.m"]))
 }
 # Prevalence
 PREV.DF[,"p.fib.col.m"]<-c(
-                           DIET$pro.ncon.w[DIET$DF=="Fib"&DIET$Cancer=="Col"],
-                           rep(DIET$pro.con.w[DIET$DF=="Fib"&DIET$Cancer=="Col"]/(nrow(PREV.DF)-1),(nrow(PREV.DF)-1))
+                           DIET$pro.ncon.m[DIET$DF=="Fib"&DIET$Cancer=="Col"],
+                           rep(DIET$pro.con.m[DIET$DF=="Fib"&DIET$Cancer=="Col"]/(nrow(PREV.DF)-1),(nrow(PREV.DF)-1))
                           )
 # Deviation (excess or deficit) in consumption from the recommendation (counterfactual distribution)
 PREV.DF[which(PREV.DF[,"mp.fib.col.m"]>=counter.fib),"d.fib.col.m"]<-0
@@ -693,7 +694,7 @@ for (j in 1:ncol(Q.PME.SIM.W))
                    )
 }
 
-# Matrix containing mid-points for adiacent values of quantiles
+# Matrix containing mid-points for adjacent values of quantiles
 MP.PME.SIM.W<-matrix(rep(NA,11*10000),nrow=11,ncol=10000)
 colnames(MP.PME.SIM.W)<-c(paste0("mp.pme.w",1:10000))
 
@@ -732,7 +733,7 @@ for (j in 1:ncol(Q.PME.SIM.M))
                    )
 }
 
-# Matrix containing mid-points for adiacent values of quantiles
+# Matrix containing mid-points for adjacent values of quantiles
 MP.PME.SIM.M<-matrix(rep(NA,11*10000),nrow=11,ncol=10000)
 colnames(MP.PME.SIM.M)<-c(paste0("mp.pme.m",1:10000))
 
@@ -771,7 +772,7 @@ for (j in 1:ncol(Q.RME.SIM.W))
                    )
 }
 
-# Matrix containing mid-points for adiacent values of quantiles
+# Matrix containing mid-points for adjacent values of quantiles
 MP.RME.SIM.W<-matrix(rep(NA,11*10000),nrow=11,ncol=10000)
 colnames(MP.RME.SIM.W)<-c(paste0("mp.rme.w",1:10000))
 
@@ -811,7 +812,7 @@ for (j in 1:ncol(Q.RME.SIM.M))
                    )
 }
 
-# Matrix containing mid-points for adiacent values of quantiles
+# Matrix containing mid-points for adjacent values of quantiles
 MP.RME.SIM.M<-matrix(rep(NA,11*10000),nrow=11,ncol=10000)
 colnames(MP.RME.SIM.M)<-c(paste0("mp.rme.m",1:10000))
 
@@ -851,7 +852,7 @@ for (j in 1:ncol(Q.DAI.SIM.W))
                    )
 }
 
-# Matrix containing mid-points for adiacent values of quantiles
+# Matrix containing mid-points for adjacent values of quantiles
 MP.DAI.SIM.W<-matrix(rep(NA,11*10000),nrow=11,ncol=10000)
 colnames(MP.DAI.SIM.W)<-c(paste0("mp.dai.w",1:10000))
 
@@ -891,7 +892,7 @@ for (j in 1:ncol(Q.DAI.SIM.M))
                    )
 }
 
-# Matrix containing mid-points for adiacent values of quantiles
+# Matrix containing mid-points for adjacent values of quantiles
 MP.DAI.SIM.M<-matrix(rep(NA,11*10000),nrow=11,ncol=10000)
 colnames(MP.DAI.SIM.M)<-c(paste0("mp.dai.m",1:10000))
 
@@ -931,7 +932,7 @@ for (j in 1:ncol(Q.NSV.SIM.W))
                    )
 }
 
-# Matrix containing mid-points for adiacent values of quantiles
+# Matrix containing mid-points for adjacent values of quantiles
 MP.NSV.SIM.W<-matrix(rep(NA,11*10000),nrow=11,ncol=10000)
 colnames(MP.NSV.SIM.W)<-c(paste0("mp.nsv.w",1:10000))
 
@@ -971,7 +972,7 @@ for (i in 1:ncol(Q.NSV.SIM.M))
                    )
 }
 
-# Matrix containing mid-points for adiacent values of quantiles
+# Matrix containing mid-points for adjacent values of quantiles
 MP.NSV.SIM.M<-matrix(rep(NA,11*10000),nrow=11,ncol=10000)
 colnames(MP.NSV.SIM.M)<-c(paste0("mp.nsv.m",1:10000))
 
@@ -1011,7 +1012,7 @@ for (j in 1:ncol(Q.FRU.SIM.W))
                    )
 }
 
-# Matrix containing mid-points for adiacent values of quantiles
+# Matrix containing mid-points for adjacent values of quantiles
 MP.FRU.SIM.W<-matrix(rep(NA,11*10000),nrow=11,ncol=10000)
 colnames(MP.FRU.SIM.W)<-c(paste0("mp.fru.w",1:10000))
 
@@ -1051,7 +1052,7 @@ for (j in 1:ncol(Q.FRU.SIM.M))
                    )
 }
 
-# Matrix containing mid-points for adiacent values of quantiles
+# Matrix containing mid-points for adjacent values of quantiles
 MP.FRU.SIM.M<-matrix(rep(NA,11*10000),nrow=11,ncol=10000)
 colnames(MP.FRU.SIM.M)<-c(paste0("mp.fru.m",1:10000))
 
@@ -1091,7 +1092,7 @@ for (j in 1:ncol(Q.FIB.SIM.W))
                    )
 }
 
-# Matrix containing mid-points for adiacent values of quantiles
+# Matrix containing mid-points for adjacent values of quantiles
 MP.FIB.SIM.W<-matrix(rep(NA,11*10000),nrow=11,ncol=10000)
 colnames(MP.FIB.SIM.W)<-c(paste0("mp.fib.w",1:10000))
 
@@ -1131,7 +1132,7 @@ for (j in 1:ncol(Q.FIB.SIM.M))
                    )
 }
 
-# Matrix containing mid-points for adiacent values of quantiles
+# Matrix containing mid-points for adjacent values of quantiles
 MP.FIB.SIM.M<-matrix(rep(NA,11*10000),nrow=11,ncol=10000)
 colnames(MP.FIB.SIM.M)<-c(paste0("mp.fib.m",1:10000))
 
@@ -1942,7 +1943,7 @@ round(sum(AF.mod$AC[AF.mod$Sex=="M"])/194754*100,1)
 round(sum(AF.mod$AC.lowCI[AF.mod$Sex=="M"])/194754*100,1)
 round(sum(AF.mod$AC.highCI[AF.mod$Sex=="M"])/194754*100,1)
 
-# ATTRIBUTABLE DEATHS AND CORRESPONDING 95 CI
+# ATTRIBUTABLE DEATHS AND CORRESPONDING 95% CI
 AF.mod[,"Obs.de"]<-c(
                      rep(c(8716,10246),3),
                      c(1176,3160),
@@ -2016,8 +2017,8 @@ y.pme.w<-y.pme.w.tmp*DIET$pro.con.w[DIET$DF=="Pme"&DIET$Cancer=="Col"]
 # PROCESSED MEAT - MEN
 x.pme.m<-qgamma(
                 seq(0,.99,.00001),
-                shape=DIET$kappa.DF.w[DIET$DF=="Pme"&DIET$Cancer=="Col"],
-                scale=DIET$theta.DF.w[DIET$DF=="Pme"&DIET$Cancer=="Col"]
+                shape=DIET$kappa.DF.m[DIET$DF=="Pme"&DIET$Cancer=="Col"],
+                scale=DIET$theta.DF.m[DIET$DF=="Pme"&DIET$Cancer=="Col"]
                )
 y.pme.m.tmp<-dgamma(
                     x.pme.m,
@@ -2265,7 +2266,6 @@ round(DIET$pro.con.w[DIET$DF=="Cof"&DIET$Cancer=="Liv"]*100,0)
 #############################
 round(DIET$pro.con.m[DIET$DF=="Cof"&DIET$Cancer=="Liv"]*100,0)
 
-
 ################################################################################
 #
 # PLOT FOR WOMEN
@@ -2274,7 +2274,12 @@ round(DIET$pro.con.m[DIET$DF=="Cof"&DIET$Cancer=="Liv"]*100,0)
 require(plotrix)
 require(extrafont)
 
-cairo_pdf("...[Your_Path]\\DFDistrWomSupFig1.pdf",width=7,height=11.5,family="Times")
+cairo_pdf(
+          "C:\\Users\\matte\\OneDrive - Università degli Studi di Milano\\Documenti\\Work\\PAF\\Italy\\Diet\\Plot\\SupFig2.DFDistrWom.pdf",
+          width=7,
+          height=11.5,
+          family="Times"
+         )
 par(mfrow=c(4,2),
     mar=c(3,3,1.5,0.5),
     family="Times New Roman",
@@ -2332,7 +2337,7 @@ text(c(0,PREV.DF[seq(2,10,2),"pme.col.w"]),
      xpd=TRUE)
 
 axis(1,at=PREV.DF[seq(1,10,2),"pme.col.w"],labels=F)
-title(xlab="Processed meat consumption (g/day)",line=1.5)
+title(xlab="Processed meat intake (gr/day)",line=1.5)
 
 # Adding label to y-axis
 title(ylab="Density (%)")
@@ -2387,14 +2392,14 @@ text(c(0,PREV.DF[seq(2,10,2),"rme.col.w"]),
      xpd=TRUE)
 
 axis(1,at=PREV.DF[seq(1,10,2),"rme.col.w"],labels=F)
-title(xlab="Red meat consumption (g/day)",line=1.5)
+title(xlab="Red meat intake (gr/day)",line=1.5)
 
 # Adding label to y-axis
 title(ylab="Density (%)")
 
 # Adding text in the plot
 rect(xleft=8,ybottom=1.207,xright=15,ytop=1.254,col="grey")
-text(17,1.223,"Proportion of women with an intake of \u2265 50 g/day: 42%",cex=.85,adj=0)
+text(17,1.223,"Proportion of women with an intake of \u226550 gr/day: 42%",cex=.85,adj=0)
 
 # DAIRY PRODUCTS
 gap.plot(x.dai.w[x.dai.w>2.3],
@@ -2442,14 +2447,65 @@ text(c(0,PREV.DF[seq(2,10,2),"dai.col.w"]),
      xpd=TRUE)
 
 axis(1,at=PREV.DF[seq(1,10,2),"dai.col.w"],labels=F)
-title(xlab="Dairy products consumption (g/day)",line=1.5)
+title(xlab="Dairy products intake (gr/day)",line=1.5)
 
 # Adding label to y-axis
 title(ylab="Density (%)")
 
 # Adding legend
 rect(xleft=26,ybottom=.4135,xright=47,ytop=.431,col="grey")
-text(52,.42,"Proportion of women with an intake of < 300 g/day: 84%",cex=.85,adj=0)
+text(52,.42,"Proportion of women with an intake of <300 gr/day: 84%",cex=.85,adj=0)
+
+# FIBRE
+gap.plot(x.fib.w,
+         y.fib.w*100,
+         xlim=c(0,37),
+         ylim=c(0,8.5),
+         gap=c(10,10.5),
+         type="l",
+         lwd=1.5,
+         xlab="",
+         ytics=seq(0,8,1),
+         yticlab=formatC(seq(0,8,1),1,format="f"),
+         ylab="",
+         yaxs="i",
+         xtics=F
+        )
+
+# Shadowing consumption lower than the recommendation
+polygon(
+        c(
+          min(x.fib.w),
+          x.fib.w[x.fib.w>min(x.fib.w)&x.fib.w<=counter.fib],
+          counter.fib
+         ),
+        c(
+          0,
+          y.fib.w[x.fib.w>min(x.fib.w)&x.fib.w<=counter.fib]*100,
+          0
+          ),
+        col="grey"
+        )
+
+# Adding x-axis
+axis(1,at=c(0,PREV.DF[seq(2,10,2),"fib.col.w"]),labels=F)
+text(c(0,PREV.DF[seq(2,10,2),"fib.col.w"]),
+     -.195,
+     labels=formatC(round(c(0,PREV.DF[seq(2,10,2),"fib.col.w"]),1),1,format="f"),
+     srt=60,
+     cex=.65,
+     adj=1,
+     xpd=TRUE)
+
+axis(1,at=PREV.DF[seq(1,10,2),"fib.col.w"],labels=F)
+title(xlab="Fibre intake (gr/day)",line=1.5)
+
+# Adding label to y-axis
+title(ylab="Density (%)")
+
+# Adding legend
+rect(xleft=1.473,ybottom=7.45,xright=2.923,ytop=7.675,col="grey")
+text(3.36,7.542,"Proportion of women with an intake of <30 gr/day: 96%",cex=.85,adj=0)
 
 # NON-STARCHY VEGETABLES
 gap.plot(x.nsv.w,
@@ -2496,11 +2552,11 @@ text(c(0,PREV.DF[seq(2,10,2),"nsv.ora.w"]),
      xpd=TRUE)
 
 axis(1,at=PREV.DF[seq(1,10,2),"nsv.ora.w"],labels=F)
-title(xlab="Non-starchy vegetables consumption (g/day)",line=1.5)
+title(xlab="Non-starchy vegetables intake (gr/day)",line=1.5)
 
 # Adding legend
 rect(xleft=22.45,ybottom=.465,xright=43.45,ytop=.479,col="grey")
-text(48.45,.47,"Proportion of women with an intake of < 240 g/day: 66%",cex=.85,adj=0)
+text(48.45,.47,"Proportion of women with an intake of <240 gr/day: 66%",cex=.85,adj=0)
 
 # Adding label to y-axis
 title(ylab="Density (%)")
@@ -2551,72 +2607,21 @@ text(c(0,PREV.DF[seq(2,10,2),"fru.ses.w"]),
      xpd=TRUE)
 
 axis(1,at=PREV.DF[seq(1,10,2),"fru.ses.w"],labels=F)
-title(xlab="Fruit consumption (g/day)",line=1.5)
+title(xlab="Fruit intake (gr/day)",line=1.5)
 
 # Adding label to y-axis
 title(ylab="Density (%)")
 
 # Adding legend
 rect(xleft=29.505,ybottom=.41411,xright=56.519,ytop=.43,col="grey")
-text(62,.42,"Proportion of women with an intake of < 160 g/day: 41%",cex=.85,adj=0)
-
-# FIBRE
-gap.plot(x.fib.w,
-         y.fib.w*100,
-         xlim=c(0,37),
-         ylim=c(0,8.5),
-         gap=c(10,10.5),
-         type="l",
-         lwd=1.5,
-         xlab="",
-         ytics=seq(0,8,1),
-         yticlab=formatC(seq(0,8,1),1,format="f"),
-         ylab="",
-         yaxs="i",
-         xtics=F
-        )
-
-# Shadowing consumption lower than the recommendation
-polygon(
-        c(
-          min(x.fib.w),
-          x.fib.w[x.fib.w>min(x.fib.w)&x.fib.w<=counter.fib],
-          counter.fib
-         ),
-        c(
-          0,
-          y.fib.w[x.fib.w>min(x.fib.w)&x.fib.w<=counter.fib]*100,
-          0
-          ),
-        col="grey"
-        )
-
-# Adding x-axis
-axis(1,at=c(0,PREV.DF[seq(2,10,2),"fib.col.w"]),labels=F)
-text(c(0,PREV.DF[seq(2,10,2),"fib.col.w"]),
-     -.195,
-     labels=formatC(round(c(0,PREV.DF[seq(2,10,2),"fib.col.w"]),1),1,format="f"),
-     srt=60,
-     cex=.65,
-     adj=1,
-     xpd=TRUE)
-
-axis(1,at=PREV.DF[seq(1,10,2),"fib.col.w"],labels=F)
-title(xlab="Fibre consumption (g/day)",line=1.5)
-
-# Adding label to y-axis
-title(ylab="Density (%)")
-
-# Adding legend
-rect(xleft=1.473,ybottom=7.45,xright=2.923,ytop=7.675,col="grey")
-text(3.36,7.542,"Proportion of women with an intake of < 30 g/day: 96%",cex=.85,adj=0)
+text(62,.42,"Proportion of women with an intake of <160 gr/day: 41%",cex=.85,adj=0)
 
 # CITRUS FRUIT
 barplot(c(round(DIET$pro.ncon.w[DIET$DF=="Cfr"]*100,0),round(DIET$pro.con.w[DIET$DF=="Cfr"]*100,0)),
         ylim=c(0,100),
         xlim=c(0,1),
         width=.2,
-        space=.6,
+        space=1,
         col=c("white","grey"),
         names.arg=c("No consumption","Any consumption"),
         axes=F
@@ -2628,7 +2633,7 @@ axis(2,at=seq(0,100,25),labels=formatC(seq(0,100,25),1,format="f"),cex=.75)
 title(ylab="Frequency (%)")
 
 # Adding label to y-axis
-title(xlab="Citrus fruit consumption",line=1.5)
+title(xlab="Citrus fruit",line=1.5)
 
 # Adding legend
 rect(xleft=.0435,ybottom=93.1,xright=.082,ytop=95.9,col="grey")
@@ -2639,7 +2644,7 @@ barplot(c(round(DIET$pro.ncon.w[DIET$DF=="Cof"&DIET$Cancer=="Liv"]*100,0),round(
         ylim=c(0,100),
         xlim=c(0,1),
         width=.2,
-        space=.6,
+        space=1,
         col=c("white","grey"),
         names.arg=c("No consumption","Any consumption"),
         axes=F
@@ -2651,7 +2656,7 @@ axis(2,at=seq(0,100,25),labels=formatC(seq(0,100,25),1,format="f"),cex=.75)
 title(ylab="Frequency (%)")
 
 # Adding label to y-axis
-title(xlab="Coffee consumption",line=1.5)
+title(xlab="Coffee",line=1.5)
 
 # Adding legend
 rect(xleft=.0435,ybottom=93.1,xright=.082,ytop=95.9,col="grey")
@@ -2663,8 +2668,14 @@ dev.off()
 # PLOT FOR MEN
 #
 ################################################################################
-cairo_pdf("...[Your_Path]\\DFDistrMenSupFig1.pdf",width=7,height=11.5,family="Times")
-par(mfrow=c(4,2),
+cairo_pdf(
+          "C:\\Users\\matte\\OneDrive - Università degli Studi di Milano\\Documenti\\Work\\PAF\\Italy\\Diet\\Plot\\SupFig1.DFDistrMen.pdf",
+          width=7,
+          height=11.5,
+          family="Times"
+         )
+par(
+    mfrow=c(4,2),
     mar=c(3,3,1.5,0.5),
     family="Times New Roman",
     cex.lab=.95,
@@ -2675,8 +2686,9 @@ par(mfrow=c(4,2),
    )
 
 # PROCESSED MEAT
-gap.plot(x.pme.m[x.pme.m>.55],
-         y.pme.m[x.pme.m>.55]*100,
+gap.plot(
+         x.pme.m[x.pme.m>.55&x.pme.m<=105],
+         y.pme.m[x.pme.m>.55&x.pme.m<=105]*100,
          xlim=c(0,110),
          ylim=c(0,3),
          gap=c(2.3,2.4),
@@ -2698,12 +2710,12 @@ rect(xleft=-.55,ybottom=2.358,xright=.55,ytop=2.65,col="white")
 polygon(
         c(
           min(x.pme.m[x.pme.m>.55]),
-          x.pme.m[x.pme.m>.55&x.pme.m<=max(x.pme.m)],
-          max(x.pme.m)
+          x.pme.m[x.pme.m>.55&x.pme.m<=105],
+          105
          ),
         c(
           0,
-          y.pme.m[x.pme.m>.55&x.pme.m<=max(x.pme.m)]*100,
+          y.pme.m[x.pme.m>.55&x.pme.m<=105]*100,
           0
           ),
         col="grey"
@@ -2721,7 +2733,7 @@ text(c(0,PREV.DF[seq(2,10,2),"pme.col.m"]),
      xpd=TRUE)
 
 axis(1,at=PREV.DF[seq(1,10,2),"pme.col.m"],labels=F)
-title(xlab="Processed meat consumption (g/day)",line=1.5)
+title(xlab="Processed meat intake (gr/day)",line=1.5)
 
 # Adding label to y-axis
 title(ylab="Density (%)")
@@ -2776,14 +2788,14 @@ text(c(0,PREV.DF[seq(2,10,2),"rme.col.m"]),
      xpd=TRUE)
 
 axis(1,at=PREV.DF[seq(1,10,2),"rme.col.m"],labels=F)
-title(xlab="Red meat consumption (g/day)",line=1.5)
+title(xlab="Red meat intake (gr/day)",line=1.5)
 
 # Adding label to y-axis
 title(ylab="Density (%)")
 
 # Adding text in the plot
 rect(xleft=8,ybottom=1.207,xright=15,ytop=1.254,col="grey")
-text(17,1.223,"Proportion of men with an intake of \u2265 50 g/day: 52%",cex=.85,adj=0)
+text(17,1.223,"Proportion of men with an intake of \u226550 gr/day: 52%",cex=.85,adj=0)
 
 # DAIRY PRODUCTS
 gap.plot(x.dai.m[x.dai.m>2.3],
@@ -2831,14 +2843,65 @@ text(c(0,PREV.DF[seq(2,10,2),"dai.col.m"]),
      xpd=TRUE)
 
 axis(1,at=PREV.DF[seq(1,10,2),"dai.col.m"],labels=F)
-title(xlab="Dairy products consumption (g/day)",line=1.5)
+title(xlab="Dairy products intake (gr/day)",line=1.5)
 
 # Adding label to y-axis
 title(ylab="Density (%)")
 
 # Adding legend
 rect(xleft=26,ybottom=.4135,xright=47,ytop=.431,col="grey")
-text(52,.42,"Proportion of men with an intake of < 300 g/day: 85%",cex=.85,adj=0)
+text(52,.42,"Proportion of men with an intake of <300 gr/day: 85%",cex=.85,adj=0)
+
+# FIBRE
+gap.plot(x.fib.m,
+         y.fib.m*100,
+         xlim=c(0,42),
+         ylim=c(0,8.5),
+         gap=c(10,10.5),
+         type="l",
+         lwd=1.5,
+         xlab="",
+         ytics=seq(0,8,1),
+         yticlab=formatC(seq(0,8,1),1,format="f"),
+         ylab="",
+         yaxs="i",
+         xtics=F
+        )
+
+# Shadowing consumption lower than the recommendation
+polygon(
+        c(
+          min(x.fib.m),
+          x.fib.m[x.fib.m>min(x.fib.m)&x.fib.m<=counter.fib],
+          counter.fib
+         ),
+        c(
+          0,
+          y.fib.m[x.fib.m>min(x.fib.m)&x.fib.m<=counter.fib]*100,
+          0
+          ),
+        col="grey"
+        )
+
+# Adding x-axis
+axis(1,at=c(0,PREV.DF[seq(2,10,2),"fib.col.m"]),labels=F)
+text(c(0,PREV.DF[seq(2,10,2),"fib.col.m"]),
+     -.195,
+     labels=formatC(round(c(0,PREV.DF[seq(2,10,2),"fib.col.m"]),1),1,format="f"),
+     srt=60,
+     cex=.65,
+     adj=1,
+     xpd=TRUE)
+
+axis(1,at=PREV.DF[seq(1,10,2),"fib.col.m"],labels=F)
+title(xlab="Fibre intake (gr/day)",line=1.5)
+
+# Adding label to y-axis
+title(ylab="Density (%)")
+
+# Adding legend
+rect(xleft=1.473,ybottom=7.45,xright=2.923,ytop=7.675,col="grey")
+text(3.36,7.542,"Proportion of men with an intake of <30 gr/day: 91%",cex=.85,adj=0)
 
 # NON-STARCHY VEGETABLES
 gap.plot(x.nsv.m,
@@ -2885,11 +2948,11 @@ text(c(0,PREV.DF[seq(2,10,2),"nsv.ora.m"]),
      xpd=TRUE)
 
 axis(1,at=PREV.DF[seq(1,10,2),"nsv.ora.m"],labels=F)
-title(xlab="Non-starchy vegetables consumption (g/day)",line=1.5)
+title(xlab="Non-starchy vegetables intake (gr/day)",line=1.5)
 
 # Adding legend
 rect(xleft=22.45,ybottom=.465,xright=43.45,ytop=.479,col="grey")
-text(48.45,.47,"Proportion of men with an intake of < 240 g/day: 59%",cex=.85,adj=0)
+text(48.45,.47,"Proportion of men with an intake of <240 gr/day: 59%",cex=.85,adj=0)
 
 # Adding label to y-axis
 title(ylab="Density (%)")
@@ -2940,72 +3003,21 @@ text(c(0,PREV.DF[seq(2,10,2),"fru.ses.m"]),
      xpd=TRUE)
 
 axis(1,at=PREV.DF[seq(1,10,2),"fru.ses.m"],labels=F)
-title(xlab="Fruit consumption (g/day)",line=1.5)
+title(xlab="Fruit intake (gr/day)",line=1.5)
 
 # Adding label to y-axis
 title(ylab="Density (%)")
 
 # Adding legend
 rect(xleft=29.505,ybottom=.41411,xright=56.519,ytop=.43,col="grey")
-text(62,.42,"Proportion of men with an intake of < 160 g/day: 49%",cex=.85,adj=0)
-
-# FIBRE
-gap.plot(x.fib.m,
-         y.fib.m*100,
-         xlim=c(0,42),
-         ylim=c(0,8.5),
-         gap=c(10,10.5),
-         type="l",
-         lwd=1.5,
-         xlab="",
-         ytics=seq(0,8,1),
-         yticlab=formatC(seq(0,8,1),1,format="f"),
-         ylab="",
-         yaxs="i",
-         xtics=F
-        )
-
-# Shadowing consumption lower than the recommendation
-polygon(
-        c(
-          min(x.fib.m),
-          x.fib.m[x.fib.m>min(x.fib.m)&x.fib.m<=counter.fib],
-          counter.fib
-         ),
-        c(
-          0,
-          y.fib.m[x.fib.m>min(x.fib.m)&x.fib.m<=counter.fib]*100,
-          0
-          ),
-        col="grey"
-        )
-
-# Adding x-axis
-axis(1,at=c(0,PREV.DF[seq(2,10,2),"fib.col.m"]),labels=F)
-text(c(0,PREV.DF[seq(2,10,2),"fib.col.m"]),
-     -.195,
-     labels=formatC(round(c(0,PREV.DF[seq(2,10,2),"fib.col.m"]),1),1,format="f"),
-     srt=60,
-     cex=.65,
-     adj=1,
-     xpd=TRUE)
-
-axis(1,at=PREV.DF[seq(1,10,2),"fib.col.m"],labels=F)
-title(xlab="Fibre consumption (g/day)",line=1.5)
-
-# Adding label to y-axis
-title(ylab="Density (%)")
-
-# Adding legend
-rect(xleft=1.473,ybottom=7.45,xright=2.923,ytop=7.675,col="grey")
-text(3.36,7.542,"Proportion of men with an intake of < 30 g/day: 91%",cex=.85,adj=0)
+text(62,.42,"Proportion of men with an intake of <160 gr/day: 49%",cex=.85,adj=0)
 
 # CITRUS FRUIT
 barplot(c(round(DIET$pro.ncon.m[DIET$DF=="Cfr"]*100,0),round(DIET$pro.con.m[DIET$DF=="Cfr"]*100,0)),
         ylim=c(0,100),
         xlim=c(0,1),
         width=.2,
-        space=.6,
+        space=1,
         col=c("white","grey"),
         names.arg=c("No consumption","Any consumption"),
         axes=F
@@ -3017,7 +3029,7 @@ axis(2,at=seq(0,100,25),labels=formatC(seq(0,100,25),1,format="f"),cex=.75)
 title(ylab="Frequency (%)")
 
 # Adding label to y-axis
-title(xlab="Citrus fruit consumption",line=1.5)
+title(xlab="Citrus fruit",line=1.5)
 
 # Adding legend
 rect(xleft=.0435,ybottom=93.1,xright=.082,ytop=95.9,col="grey")
@@ -3028,7 +3040,7 @@ barplot(c(round(DIET$pro.ncon.m[DIET$DF=="Cof"&DIET$Cancer=="Liv"]*100,0),round(
         ylim=c(0,100),
         xlim=c(0,1),
         width=.2,
-        space=.6,
+        space=1,
         col=c("white","grey"),
         names.arg=c("No consumption","Any consumption"),
         axes=F
@@ -3040,7 +3052,7 @@ axis(2,at=seq(0,100,25),labels=formatC(seq(0,100,25),1,format="f"),cex=.75)
 title(ylab="Frequency (%)")
 
 # Adding label to y-axis
-title(xlab="Coffee consumption",line=1.5)
+title(xlab="Coffee",line=1.5)
 
 # Adding legend
 rect(xleft=.0435,ybottom=93.1,xright=.082,ytop=95.9,col="grey")
