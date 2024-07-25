@@ -1,7 +1,7 @@
 ################################################################################
 # DATA OF EACH PAIR OF DIETARY FACTOR AND CANCER SITE TO COMPUTE AF
 ################################################################################
-DIET<-read.table("C:\\Users\\matte\\OneDrive - Università degli Studi di Milano\\Documenti\\Work\\PAF\\Italy\\Diet\\Data\\AfData.csv",
+DIET<-read.table("[YourPath]\\AfData.csv",
                  header=T,
                  dec=".",
                  sep=";"
@@ -2275,7 +2275,7 @@ require(plotrix)
 require(extrafont)
 
 cairo_pdf(
-          "C:\\Users\\matte\\OneDrive - Università degli Studi di Milano\\Documenti\\Work\\PAF\\Italy\\Diet\\Plot\\SupFig2.DFDistrWom.pdf",
+          "[YourPath]\\SupFig2.DFDistrWom.pdf",
           width=7,
           height=11.5,
           family="Times"
@@ -2669,7 +2669,7 @@ dev.off()
 #
 ################################################################################
 cairo_pdf(
-          "C:\\Users\\matte\\OneDrive - Università degli Studi di Milano\\Documenti\\Work\\PAF\\Italy\\Diet\\Plot\\SupFig1.DFDistrMen.pdf",
+          "[YourPath]\\SupFig1.DFDistrMen.pdf",
           width=7,
           height=11.5,
           family="Times"
